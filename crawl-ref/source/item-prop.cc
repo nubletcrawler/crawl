@@ -1590,11 +1590,8 @@ int wand_charge_value(int type)
     {
     case WAND_CLOUDS:
     case WAND_SCATTERSHOT:
-<<<<<<< HEAD
-=======
     case WAND_TELEPORTATION:
     case WAND_HEAL_WOUNDS:
->>>>>>> parent of 4f29636... Revert "Revert "Remove wands of heal wounds""
     case WAND_HASTING:
         return 9;
 
@@ -1655,6 +1652,7 @@ bool is_offensive_wand(const item_def& item)
     case WAND_FLAME:
     case WAND_PARALYSIS:
     case WAND_ICEBLAST:
+    case WAND_TELEPORTATION:
     case WAND_POLYMORPH:
     case WAND_ACID:
     case WAND_DISINTEGRATION:

@@ -713,6 +713,18 @@ static int _haste_wand_weight()
 }
 
 /**
+ * What weight should wands of Teleportation be given in wand acquirement,
+ * based on their utility to the player? (More utile -> higher weight -> more
+ * likely)
+ */
+static int _tele_wand_weight()
+{
+    if (you.species == SP_FORMICID || crawl_state.game_is_sprint())
+        return 1; // can only be used to tele away enemies
+    return 15;
+}
+
+/**
  * Choose a random type of wand to be generated via acquirement or god gifts.
  *
  * Heavily weighted toward more useful wands and wands the player hasn't yet
@@ -722,7 +734,7 @@ static int _haste_wand_weight()
  */
 static int _acquirement_wand_subtype(bool /*divine*/, int & /*quantity*/)
 {
-    // basic total: 127??
+    // basic total: 152
     vector<pair<wand_type, int>> weights = {
         { WAND_SCATTERSHOT,     25 },
         { WAND_CLOUDS,          25 },
@@ -733,6 +745,8 @@ static int _acquirement_wand_subtype(bool /*divine*/, int & /*quantity*/)
         // normally 25
         { WAND_HEAL_WOUNDS,     _hw_wand_weight() },
         { WAND_HASTING,         _haste_wand_weight() },
+        // normally 15
+        { WAND_TELEPORTATION,   _tele_wand_weight() },
         { WAND_DISINTEGRATION,  5 },
         { WAND_POLYMORPH,       5 },
         { WAND_DIGGING,         5 },
